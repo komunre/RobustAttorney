@@ -15,12 +15,13 @@ namespace Content.Client.UI
         public static string LawButton = "button";
         public static string LawLineEdit = "line-edit";
         public static string LawLabel = "label";
+        public static int fontSize = 12;
         public StyleLaw()
         {
             var resCache = IoCManager.Resolve<IResourceCache>();
 
             var notoSansRes = resCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf");
-            var notoSans = new VectorFont(notoSansRes, 16);
+            var notoSans = new VectorFont(notoSansRes, 12);
 
             var importantButton = new StyleBoxFlat()
             {
@@ -42,6 +43,7 @@ namespace Content.Client.UI
                 Element().Prop("font", notoSans).Prop(PanelContainer.StylePropertyPanel, panel),
                 Element<Button>().Prop(Button.StylePropertyStyleBox, button),
                 Element<Label>().Prop(Label.StylePropertyFont, notoSans),
+                Element<ScrollContainer>().Prop(ScrollContainer.StylePropertyModulateSelf, Color.FromHex("#c9edff")),
                 new StyleRule(new SelectorElement(typeof(Button), new[] { ImportantButton }, null, null),
                 new []
                 {

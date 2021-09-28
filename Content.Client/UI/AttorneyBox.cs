@@ -15,14 +15,16 @@ namespace Content.Client.UI
     class AttorneyBox : Control
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
-        private Label _content;
+        private RichTextLabel _content;
         private Label _name;
+        private float panelWidth = 500f;
         public AttorneyBox()
         {
             IoCManager.InjectDependencies(this);
-            AddChild(new PanelContainer() {
-                MinWidth = 300f,
+            AddChild(new ScrollContainer() {
+                MinWidth = panelWidth,
                 MinHeight = 200f,
+                MaxHeight = 200f,
                 Children = {
                     new BoxContainer()
                     {
@@ -34,22 +36,19 @@ namespace Content.Client.UI
                                 Align = Label.AlignMode.Center,
                                 MinWidth = 100f,
                                 MinHeight = 20f,
-                                FontColorOverride = new Color(0, 0, 0),
+                                FontColorOverride = new Color(255, 255, 255),
                                 Text = "Null Attorney!"
                             }),
-                            (_content = new Label()
+                            (_content = new RichTextLabel()
                             {
-                                Align = Label.AlignMode.Left,
-                                VerticalExpand = true,
-                                MinHeight = 200f,
                                 MinWidth = 300f,
-                                FontColorOverride = new Color(0, 0, 0),
-                                Text = "They don't speak anything!"
+                                MaxWidth = 300f,
+                                RectClipContent = true,
                             }),
                         }
                     }
                 }
-            });
+            });;
         }
 
         public void Update()
@@ -59,7 +58,7 @@ namespace Content.Client.UI
                 if (attorney.Changed)
                 {
                     _name.Text = attorney.AttorneyName;
-                    _content.Text = attorney.Phrase;
+                    _content.SetMessage(attorney.Phrase);
                 }
             }
         }

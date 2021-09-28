@@ -81,6 +81,11 @@ namespace Content.Client.UI
                 Logger.Log(LogLevel.Debug, "This client is now active");
             };
 
+            _phrase.OnTextEntered += args =>
+            {
+                _phrase.Text = "";
+            };
+
             _phrase.OnTextChanged += args =>
             {
                 if (_attorney == null)
