@@ -5,12 +5,19 @@ using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Client.Overlays;
+using Content.Client.UI;
+using Robust.Client.State;
+using Robust.Client.Player;
+using Content.Shared.Player;
 
 // DEVNOTE: Games that want to be on the hub are FORCED use the "Content." prefix for assemblies they want to load.
 namespace Content.Client
 {
     public class EntryPoint : GameClient
     {
+        private StyleLaw _styleLaw;
+        private bool playerAttachedToPhraseBox = false;
         public override void Init()
         {
             var factory = IoCManager.Resolve<IComponentFactory>();
@@ -46,15 +53,23 @@ namespace Content.Client
 
             // DEVNOTE: Further setup...
             var client = IoCManager.Resolve<IBaseClient>();
-            
+
             // DEVNOTE: You might want a main menu to connect to a server, or start a singleplayer game.
             // Be sure to check out StateManager for this! Below you'll find examples to start a game.
-            
+
             // If you want to connect to a server...
             // client.ConnectToServer("ip-goes-here", 1212);
-            
+
             // Optionally, singleplayer also works!
             // client.StartSinglePlayer();
+            IoCManager.Resolve<ILightManager>().Enabled = false;
+
+            var overlayManager = IoCManager.Resolve<IOverlayManager>();
+            overlayManager.AddOverlay(new AttorneyOverlay());
+
+            _styleLaw = new StyleLaw();
+
+            IoCManager.Resolve<IStateManager>().RequestStateChange<GameScreen>();
         }
 
         protected override void Dispose(bool disposing)
@@ -68,6 +83,11 @@ namespace Content.Client
         {
             base.Update(level, frameEventArgs);
             // DEVNOTE: Game update loop goes here. Usually you'll want some independent GameTicker.
+            if (!playerAttachedToPhraseBox && IoCManager.Resolve<IPlayerManager>().LocalPlayer?.ControlledEntity != null)
+            {
+                GameScreen._phraseBox.AttachPlayer(IoCManager.Resolve<IPlayerManager>().LocalPlayer.ControlledEntity.GetComponent<AttorneyComponent>());
+                playerAttachedToPhraseBox = true;
+            }
         }
     }
 
