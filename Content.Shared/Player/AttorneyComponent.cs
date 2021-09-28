@@ -18,6 +18,7 @@ namespace Content.Shared.Player
         public bool Changed = false;
         public string Avatar = "attorney.jpg";
         public bool Defense = false;
+        public string AttorneyName = "Null attorney";
     }
 
     public class SharedAttorneyControlSystem : EntitySystem
@@ -31,7 +32,7 @@ namespace Content.Shared.Player
 
         private void GetAttorneyState(EntityUid id, AttorneyComponent attorney, ref ComponentGetState args)
         {
-            args.State = new AttorneyState(attorney.Phrase, attorney.Changed, attorney.Avatar, attorney.Defense);
+            args.State = new AttorneyState(attorney.Phrase, attorney.Changed, attorney.Avatar, attorney.Defense, attorney.AttorneyName);
         }
 
         private void HandleAttorneyState(EntityUid id, AttorneyComponent attorney, ref ComponentHandleState args)
@@ -44,6 +45,7 @@ namespace Content.Shared.Player
             attorney.Changed = state.Changed;
             attorney.Avatar = state.Avatar;
             attorney.Defense = state.Defense;
+            attorney.AttorneyName = state.Name;
         }
     }
 
@@ -54,12 +56,14 @@ namespace Content.Shared.Player
         public bool Changed;
         public string Avatar;
         public bool Defense = false;
-        public AttorneyState(string phrase, bool changed, string avatar, bool defense)
+        public string Name = "Null";
+        public AttorneyState(string phrase, bool changed, string avatar, bool defense, string name)
         {
             Phrase = phrase;
             Changed = changed;
             Avatar = avatar;
             Defense = defense;
+            Name = name;
         }
     }
 }

@@ -18,5 +18,10 @@ namespace Content.Client.Player
         {
             RaiseNetworkEvent(new AttorneyFocusRequest(id));
         }
+
+        public void ChangePhrase(EntityUid id, string phrase)
+        {
+            RaiseNetworkEvent(new ChangePhraseRequest(id, phrase));
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Content.Server.Player
         public override void Initialize()
         {
             SubscribeNetworkEvent<AttorneyFocusRequest>(HandleAttorneyFocusRequest);
+            SubscribeNetworkEvent<ChangePhraseRequest>(HandleChangePhraseRequest);
         }
 
         private void HandleAttorneyFocusRequest(AttorneyFocusRequest request)
@@ -27,6 +28,11 @@ namespace Content.Server.Player
             var attoneyToFocus = EntityManager.GetEntity(request.Id).GetComponent<AttorneyComponent>();
             attoneyToFocus.Changed = true;
             attoneyToFocus.Dirty();
+        }
+
+        private void HandleChangePhraseRequest(ChangePhraseRequest request)
+        {
+            EntityManager.GetEntity(request.Id).GetComponent<AttorneyComponent>().Phrase = request.Phrase;
         }
     }
 }

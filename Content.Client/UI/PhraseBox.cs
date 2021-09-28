@@ -88,7 +88,9 @@ namespace Content.Client.UI
                     Logger.Error("No attorney attached. Can not set changed and phrase");
                     return;
                 }
-                _systemManager.GetEntitySystem<AttorneySystem>().RequestFocus(_attorney.Owner.Uid);
+                var attorneySystem = _systemManager.GetEntitySystem<AttorneySystem>();
+                attorneySystem.ChangePhrase(_attorney.Owner.Uid, _phrase.Text);
+                attorneySystem.RequestFocus(_attorney.Owner.Uid);
             };
         }
 

@@ -5,7 +5,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Shared.Maths;
 using Robust.Shared.IoC;
-using Robust.Client.ResourceManagement;
+using static Robust.Client.UserInterface.StylesheetHelpers;
 
 namespace Content.Client.UI
 {
@@ -14,11 +14,13 @@ namespace Content.Client.UI
         public static string ImportantButton = "important-button";
         public static string LawButton = "button";
         public static string LawLineEdit = "line-edit";
+        public static string LawLabel = "label";
         public StyleLaw()
         {
             var resCache = IoCManager.Resolve<IResourceCache>();
 
             var notoSansRes = resCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Regular.ttf");
+            var notoSans = new VectorFont(notoSansRes, 16);
 
             var importantButton = new StyleBoxFlat()
             {
@@ -35,19 +37,11 @@ namespace Content.Client.UI
                 BackgroundColor = Color.FromHex("#c9edff")
             };
 
-            var styleRules = new[]
+            var styleRules = new StyleRule[]
             {
-                new StyleRule(new SelectorElement(null, null, null, null),
-                new []
-                {
-                    new StyleProperty("font", new VectorFont(notoSansRes, 16)),
-                    new StyleProperty(PanelContainer.StylePropertyPanel, panel),
-                }),
-                new StyleRule(new SelectorElement(typeof(Button), new[] { LawButton }, null, null),
-                new []
-                {
-                     new StyleProperty(Button.StylePropertyStyleBox, button)
-                }),
+                Element().Prop("font", notoSans).Prop(PanelContainer.StylePropertyPanel, panel),
+                Element<Button>().Prop(Button.StylePropertyStyleBox, button),
+                Element<Label>().Prop(Label.StylePropertyFont, notoSans),
                 new StyleRule(new SelectorElement(typeof(Button), new[] { ImportantButton }, null, null),
                 new []
                 {

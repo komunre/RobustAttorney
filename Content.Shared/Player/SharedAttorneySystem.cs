@@ -18,6 +18,19 @@ namespace Content.Shared.Player
             Id = id;
         }
     }
+
+    [Serializable, NetSerializable]
+    public class ChangePhraseRequest : EntityEventArgs
+    {
+        public EntityUid Id;
+        public string Phrase;
+
+        public ChangePhraseRequest(EntityUid id, string phrase)
+        {
+            Id = id;
+            Phrase = phrase;
+        }
+    }
     public class SharedAttorneySystem : EntitySystem
     {
     }

@@ -35,6 +35,7 @@ namespace Content.Client.UI
                                 MinWidth = 100f,
                                 MinHeight = 20f,
                                 FontColorOverride = new Color(0, 0, 0),
+                                Text = "Null Attorney!"
                             }),
                             (_content = new Label()
                             {
@@ -43,6 +44,7 @@ namespace Content.Client.UI
                                 MinHeight = 200f,
                                 MinWidth = 300f,
                                 FontColorOverride = new Color(0, 0, 0),
+                                Text = "They don't speak anything!"
                             }),
                         }
                     }
@@ -56,6 +58,7 @@ namespace Content.Client.UI
             {
                 if (attorney.Changed)
                 {
+                    _name.Text = attorney.AttorneyName;
                     _content.Text = attorney.Phrase;
                 }
             }
