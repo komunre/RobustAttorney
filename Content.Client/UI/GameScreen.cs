@@ -19,6 +19,7 @@ namespace Content.Client.UI
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default;
         [Dependency] private readonly IPlayerManager _playerManager = default!;
         public static PhraseBox _phraseBox;
+        private AttorneyBox _attorneyBox;
 
         public override void Shutdown()
         {
@@ -28,13 +29,19 @@ namespace Content.Client.UI
         public override void Startup()
         {
             _phraseBox = new PhraseBox();
-            var attorneyBox = new AttorneyBox();
+            _attorneyBox = new AttorneyBox();
 
             LayoutContainer.SetAnchorAndMarginPreset(_phraseBox, LayoutContainer.LayoutPreset.BottomRight);
-            LayoutContainer.SetAnchorAndMarginPreset(attorneyBox, LayoutContainer.LayoutPreset.BottomLeft);
+            LayoutContainer.SetAnchorAndMarginPreset(_attorneyBox, LayoutContainer.LayoutPreset.BottomLeft);
 
             _userInterfaceManager.StateRoot.AddChild(_phraseBox);
-            _userInterfaceManager.StateRoot.AddChild(attorneyBox);
+            _userInterfaceManager.StateRoot.AddChild(_attorneyBox);
+        }
+
+        public override void FrameUpdate(FrameEventArgs e)
+        {
+            base.FrameUpdate(e);
+            _attorneyBox.Update();
         }
     }
 }

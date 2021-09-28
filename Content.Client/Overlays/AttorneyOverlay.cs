@@ -18,7 +18,7 @@ namespace Content.Client.Overlays
     class AttorneyOverlay : Overlay
     {
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-        [Dependency] private readonly IComponentManager _componentManager = default!;
+        [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
         public override OverlaySpace Space => OverlaySpace.ScreenSpaceBelowWorld;
 
@@ -39,7 +39,7 @@ namespace Content.Client.Overlays
             handle.UseShader(_shader);
             handle.DrawRect(new UIBox2(new Vector2(0, 0), new Vector2(800, 600)), Color.White, false);
 
-            foreach (var attorney in _componentManager.EntityQuery<AttorneyComponent>())
+            foreach (var attorney in _entityManager.EntityQuery<AttorneyComponent>())
             {
                 if (attorney.Changed)
                 {

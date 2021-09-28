@@ -27,27 +27,31 @@ namespace Content.Client.UI
             AddChild(new PanelContainer()
             {
                 MinWidth = 300f,
+                MinHeight = 300f,
                 Children =
                 {
                     new BoxContainer()
                     {
-                        Margin = new Thickness(0, 0),
+                        Orientation = BoxContainer.LayoutOrientation.Vertical,
+                        Margin = new Thickness(0, -100),
                         Children =
                         {
                             (_objection = new Button()
                             {
-                                MinWidth = 50f,
+                                MaxHeight = 30f,
+                                Text = "OBJECTION!",
                             }),
                         }
                     },
                     new BoxContainer()
                     {
+                        Orientation = BoxContainer.LayoutOrientation.Horizontal,
                         Margin = new Thickness(0, 100),
                         Children =
                         {
                             (_phrase = new HistoryLineEdit()
                             {
-                                MinHeight = 30f,
+                                MaxHeight = 30f,
                                 MinWidth = 200f,
                                 MaxWidth = 300f,
                                 HorizontalExpand = true,
@@ -55,6 +59,7 @@ namespace Content.Client.UI
                             (_send = new Button()
                             {
                                 MinWidth = 50f,
+                                MaxHeight = 30f,
                                 Text = "Send",
                             })
                         }

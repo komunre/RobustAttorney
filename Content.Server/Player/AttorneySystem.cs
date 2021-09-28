@@ -11,7 +11,7 @@ namespace Content.Server.Player
 {
     class AttorneySystem : SharedAttorneySystem
     {
-        [Dependency] private readonly IComponentManager _componentManager = default!;
+        [Dependency] private readonly IEntityManager _entityManager = default!;
         public override void Initialize()
         {
             SubscribeNetworkEvent<AttorneyFocusRequest>(HandleAttorneyFocusRequest);
@@ -19,7 +19,7 @@ namespace Content.Server.Player
 
         private void HandleAttorneyFocusRequest(AttorneyFocusRequest request)
         {
-            foreach (var attorney in _componentManager.EntityQuery<AttorneyComponent>())
+            foreach (var attorney in _entityManager.EntityQuery<AttorneyComponent>())
             {
                 attorney.Changed = false;
                 attorney.Dirty();
