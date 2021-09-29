@@ -18,6 +18,11 @@ namespace Content.Client
     {
         private StyleLaw _styleLaw;
         private bool playerAttachedToPhraseBox = false;
+        public override void PreInit()
+        {
+            base.PreInit();
+            IoCManager.Resolve<IClyde>().SetWindowTitle("Robust Attorney");
+        }
         public override void Init()
         {
             var factory = IoCManager.Resolve<IComponentFactory>();
