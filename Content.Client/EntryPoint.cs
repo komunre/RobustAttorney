@@ -21,7 +21,8 @@ namespace Content.Client
         public override void PreInit()
         {
             base.PreInit();
-            IoCManager.Resolve<IClyde>().SetWindowTitle("Robust Attorney");
+            var clyde = IoCManager.Resolve<IClyde>();
+            clyde.SetWindowTitle("Robust Attorney"); 
         }
         public override void Init()
         {

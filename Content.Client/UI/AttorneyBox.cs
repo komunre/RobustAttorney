@@ -9,20 +9,27 @@ using Robust.Shared.IoC;
 using Robust.Shared.GameObjects;
 using Content.Shared.Player;
 using Robust.Shared.Maths;
+using Robust.Client.Graphics;
+using Robust.Shared.Timing;
 
 namespace Content.Client.UI
 {
     class AttorneyBox : Control
     {
         [Dependency] private readonly IEntityManager _entityManager = default!;
+        [Dependency] private readonly IClyde _clyde = default!;
         private RichTextLabel _content;
         private Label _name;
-        private float panelWidth = 500f;
+        private float panelWidth = 1280;
+        private PanelContainer _mainContainer;
         public AttorneyBox()
         {
+            //panelWidth = _clyde.ScreenSize.X;
+            Margin = new Thickness(-(1280/2), 0);
             IoCManager.InjectDependencies(this);
-            AddChild(new BoxContainer() {
-                MinWidth = panelWidth,
+            AddChild((_mainContainer = new PanelContainer() {
+                MinWidth = 800f,
+                //MaxWidth = panelWidth,
                 MinHeight = 200f,
                 MaxHeight = 200f,
                 Children = {
@@ -47,7 +54,7 @@ namespace Content.Client.UI
                                     (_content = new RichTextLabel()
                                     {
                                         MinWidth = 300f,
-                                        MaxWidth = 300f,
+                                        MaxWidth = 800f,
                                         RectClipContent = true,
                                     }),
                                 }
@@ -55,7 +62,7 @@ namespace Content.Client.UI
                         }
                     }
                 }
-            });;
+            }));
         }
 
         public void Update()
@@ -68,6 +75,13 @@ namespace Content.Client.UI
                     _content.SetMessage(attorney.Phrase);
                 }
             }
+        }
+
+        protected override void FrameUpdate(FrameEventArgs args)
+        {
+            base.FrameUpdate(args);
+            _mainContainer.SetWidth = _clyde.ScreenSize.X;
+            _mainContainer.Margin = new Thickness(-(_clyde.ScreenSize.X / 2), 100);
         }
     }
 }

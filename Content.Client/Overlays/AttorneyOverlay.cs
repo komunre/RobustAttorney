@@ -20,6 +20,7 @@ namespace Content.Client.Overlays
         [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
         [Dependency] private readonly IEntityManager _entityManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
+        [Dependency] private readonly IClyde _clyde = default!;
         public override OverlaySpace Space => OverlaySpace.ScreenSpaceBelowWorld;
 
         private readonly ShaderInstance _shader;
@@ -39,7 +40,7 @@ namespace Content.Client.Overlays
 
             handle.UseShader(_shader);
             handle.DrawRect(new UIBox2(new Vector2(0, 0), new Vector2(800, 600)), Color.White, false);
-            handle.DrawTextureRect(_lawCourt, new UIBox2(0, 0, 800, 600));
+            handle.DrawTextureRect(_lawCourt, new UIBox2(0, 0, _clyde.ScreenSize.X, _clyde.ScreenSize.Y));
 
             foreach (var attorney in _entityManager.EntityQuery<AttorneyComponent>())
             {

@@ -27,13 +27,13 @@ namespace Content.Client.UI
             AddChild(new PanelContainer()
             {
                 MinWidth = 300f,
-                MinHeight = 300f,
+                MinHeight = 80f,
                 Children =
                 {
                     new BoxContainer()
                     {
                         Orientation = BoxContainer.LayoutOrientation.Vertical,
-                        Margin = new Thickness(0, -30),
+                        Margin = new Thickness(0, 0),
                         Children =
                         {
                             (_objection = new Button()
@@ -48,7 +48,6 @@ namespace Content.Client.UI
                     new BoxContainer()
                     {
                         Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                        Margin = new Thickness(0, 100),
                         Children =
                         {
                             (_phrase = new HistoryLineEdit()

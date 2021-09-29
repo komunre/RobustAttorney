@@ -33,9 +33,11 @@ namespace Content.Client.UI
                 BackgroundColor = Color.FromHex("#2ba6e3")
             };
 
+            var panelColor = Color.FromHex("#416578");
+            panelColor = panelColor.WithAlpha(0.67f);
             var panel = new StyleBoxFlat()
             {
-                BackgroundColor = Color.FromHex("#c9edff")
+                BackgroundColor = panelColor
             };
 
             var lineEdit = new StyleBoxFlat()

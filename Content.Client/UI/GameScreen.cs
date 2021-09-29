@@ -33,7 +33,7 @@ namespace Content.Client.UI
             _attorneyBox = new AttorneyBox();
 
             LayoutContainer.SetAnchorAndMarginPreset(_phraseBox, LayoutContainer.LayoutPreset.BottomRight);
-            LayoutContainer.SetAnchorAndMarginPreset(_attorneyBox, LayoutContainer.LayoutPreset.BottomLeft);
+            LayoutContainer.SetAnchorAndMarginPreset(_attorneyBox, LayoutContainer.LayoutPreset.Center);
 
             _userInterfaceManager.StateRoot.AddChild(_phraseBox);
             _userInterfaceManager.StateRoot.AddChild(_attorneyBox);
