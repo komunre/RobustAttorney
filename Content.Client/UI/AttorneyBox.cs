@@ -21,7 +21,7 @@ namespace Content.Client.UI
         public AttorneyBox()
         {
             IoCManager.InjectDependencies(this);
-            AddChild(new ScrollContainer() {
+            AddChild(new BoxContainer() {
                 MinWidth = panelWidth,
                 MinHeight = 200f,
                 MaxHeight = 200f,
@@ -39,12 +39,19 @@ namespace Content.Client.UI
                                 FontColorOverride = new Color(255, 255, 255),
                                 Text = "Null Attorney!"
                             }),
-                            (_content = new RichTextLabel()
-                            {
-                                MinWidth = 300f,
-                                MaxWidth = 300f,
-                                RectClipContent = true,
-                            }),
+                            new ScrollContainer() {
+                                MinWidth = panelWidth,
+                                MinHeight = 180f,
+                                MaxHeight = 180f,
+                                Children = {
+                                    (_content = new RichTextLabel()
+                                    {
+                                        MinWidth = 300f,
+                                        MaxWidth = 300f,
+                                        RectClipContent = true,
+                                    }),
+                                }
+                            }
                         }
                     }
                 }
