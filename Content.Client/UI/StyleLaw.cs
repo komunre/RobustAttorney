@@ -38,11 +38,18 @@ namespace Content.Client.UI
                 BackgroundColor = Color.FromHex("#c9edff")
             };
 
+            var lineEdit = new StyleBoxFlat()
+            {
+                BorderColor = Color.Blue,
+                BackgroundColor = Color.FromHex("#505c53"),
+            };
+
             var styleRules = new StyleRule[]
             {
                 Element().Prop("font", notoSans).Prop(PanelContainer.StylePropertyPanel, panel),
                 Element<Button>().Prop(Button.StylePropertyStyleBox, button),
                 Element<Label>().Prop(Label.StylePropertyFont, notoSans),
+                Element<HistoryLineEdit>().Prop(HistoryLineEdit.StylePropertyCursorColor, Color.Black).Prop(HistoryLineEdit.StylePropertyStyleBox, lineEdit),
                 Element<ScrollContainer>().Prop(ScrollContainer.StylePropertyModulateSelf, Color.FromHex("#c9edff")),
                 new StyleRule(new SelectorElement(typeof(Button), new[] { ImportantButton }, null, null),
                 new []

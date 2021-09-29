@@ -33,12 +33,14 @@ namespace Content.Client.UI
                     new BoxContainer()
                     {
                         Orientation = BoxContainer.LayoutOrientation.Vertical,
-                        Margin = new Thickness(0, -100),
+                        Margin = new Thickness(0, -30),
                         Children =
                         {
                             (_objection = new Button()
                             {
                                 MaxHeight = 30f,
+                                MaxWidth = 100f,
+                                TextAlign = Label.AlignMode.Center,
                                 Text = "OBJECTION!",
                             }),
                         }
@@ -56,12 +58,6 @@ namespace Content.Client.UI
                                 MaxWidth = 300f,
                                 HorizontalExpand = true,
                             }),
-                            (_send = new Button()
-                            {
-                                MinWidth = 50f,
-                                MaxHeight = 30f,
-                                Text = "Send",
-                            })
                         }
                     }
                 }

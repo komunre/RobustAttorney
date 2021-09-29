@@ -25,11 +25,12 @@ namespace Content.Client.Overlays
         private readonly ShaderInstance _shader;
 
         private Dictionary<string, Texture> _attorneyTextures = new();
-
+        private Texture _lawCourt;
         public AttorneyOverlay()
         {
             IoCManager.InjectDependencies(this);
             _shader = _prototypeManager.Index<ShaderPrototype>("unshaded").Instance();
+            _lawCourt = _resCache.GetResource<TextureResource>("/Textures/law_court.png").Texture;
         }
 
         protected override void Draw(in OverlayDrawArgs args)
@@ -38,6 +39,7 @@ namespace Content.Client.Overlays
 
             handle.UseShader(_shader);
             handle.DrawRect(new UIBox2(new Vector2(0, 0), new Vector2(800, 600)), Color.White, false);
+            handle.DrawTextureRect(_lawCourt, new UIBox2(0, 0, 800, 600));
 
             foreach (var attorney in _entityManager.EntityQuery<AttorneyComponent>())
             {
@@ -59,7 +61,7 @@ namespace Content.Client.Overlays
                                 _attorneyTextures.Add(attorney.Avatar, _resCache.GetResource<TextureResource>("/Textures/attorneys/" + attorney.Avatar).Texture);
                             }
                             //handle.DrawTextureRect(_attorneyTextures[attorney.Avatar], new UIBox2(new Vector2(300, 0), new Vector2(300+150, 150)));
-                            handle.DrawRect(new UIBox2(300, 0, 300 + 150, 150), attorney.Color);
+                            handle.DrawRect(new UIBox2(650, 0, 650 + 150, 150), attorney.Color);
                             break;
                     }
                 }
