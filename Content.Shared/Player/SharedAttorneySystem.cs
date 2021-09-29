@@ -31,7 +31,36 @@ namespace Content.Shared.Player
             Phrase = phrase;
         }
     }
+
+    [Serializable, NetSerializable]
+    public class ObjectionRequest : EntityEventArgs
+    {
+        public EntityUid Id;
+        public ObjectionRequest(EntityUid id)
+        {
+            Id = id;
+        }
+    }
+
+    [Serializable, NetSerializable]
+    public class EndPhraseRequest : EntityEventArgs
+    {
+        
+    }
+
+    [Serializable, NetSerializable]
+    public class PlayObjection : EntityEventArgs
+    {
+
+    }
+
+    [Serializable, NetSerializable]
+    public class PlayPhraseEnd : EntityEventArgs
+    {
+
+    }
     public class SharedAttorneySystem : EntitySystem
     {
     }
+
 }

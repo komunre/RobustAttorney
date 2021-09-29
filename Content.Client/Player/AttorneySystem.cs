@@ -14,6 +14,11 @@ namespace Content.Client.Player
     class AttorneySystem : SharedAttorneySystem
     {
         [Dependency] private readonly IPlayerManager _playerManager = default!;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
         public void RequestFocus(EntityUid id)
         {
             RaiseNetworkEvent(new AttorneyFocusRequest(id));
@@ -22,6 +27,16 @@ namespace Content.Client.Player
         public void ChangePhrase(EntityUid id, string phrase)
         {
             RaiseNetworkEvent(new ChangePhraseRequest(id, phrase));
+        }
+
+        public void EndPhrase()
+        {
+            RaiseNetworkEvent(new EndPhraseRequest());
+        }
+
+        public void Objection(EntityUid id)
+        {
+            RaiseNetworkEvent(new ObjectionRequest(id));
         }
     }
 }

@@ -6,6 +6,7 @@ using Robust.Shared.Serialization;
 using Robust.Shared.GameStates;
 using System;
 using System.Collections.Generic;
+using Robust.Shared.Maths;
 
 namespace Content.Shared.Player
 {
@@ -19,6 +20,7 @@ namespace Content.Shared.Player
         public string Avatar = "attorney.jpg";
         public bool Defense = false;
         public string AttorneyName = "Null attorney";
+        public Color Color = Color.Red;
     }
 
     public class SharedAttorneyControlSystem : EntitySystem
@@ -32,7 +34,7 @@ namespace Content.Shared.Player
 
         private void GetAttorneyState(EntityUid id, AttorneyComponent attorney, ref ComponentGetState args)
         {
-            args.State = new AttorneyState(attorney.Phrase, attorney.Changed, attorney.Avatar, attorney.Defense, attorney.AttorneyName);
+            args.State = new AttorneyState(attorney.Phrase, attorney.Changed, attorney.Avatar, attorney.Defense, attorney.AttorneyName, attorney.Color);
         }
 
         private void HandleAttorneyState(EntityUid id, AttorneyComponent attorney, ref ComponentHandleState args)
@@ -46,6 +48,7 @@ namespace Content.Shared.Player
             attorney.Avatar = state.Avatar;
             attorney.Defense = state.Defense;
             attorney.AttorneyName = state.Name;
+            attorney.Color = state.Color;
         }
     }
 
@@ -57,13 +60,15 @@ namespace Content.Shared.Player
         public string Avatar;
         public bool Defense = false;
         public string Name = "Null";
-        public AttorneyState(string phrase, bool changed, string avatar, bool defense, string name)
+        public Color Color = Color.Red;
+        public AttorneyState(string phrase, bool changed, string avatar, bool defense, string name, Color color)
         {
             Phrase = phrase;
             Changed = changed;
             Avatar = avatar;
             Defense = defense;
             Name = name;
+            Color = color;
         }
     }
 }

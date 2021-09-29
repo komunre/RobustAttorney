@@ -81,9 +81,15 @@ namespace Content.Client.UI
                 Logger.Log(LogLevel.Debug, "This client is now active");
             };
 
+            _objection.OnButtonDown += args =>
+            {
+                _systemManager.GetEntitySystem<AttorneySystem>().Objection(_attorney.Owner.Uid);
+            };
+
             _phrase.OnTextEntered += args =>
             {
                 _phrase.Text = "";
+                _systemManager.GetEntitySystem<AttorneySystem>().EndPhrase();
             };
 
             _phrase.OnTextChanged += args =>

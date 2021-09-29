@@ -50,14 +50,16 @@ namespace Content.Client.Overlays
                             {
                                 _attorneyTextures.Add(attorney.Avatar, _resCache.GetResource<TextureResource>("/Textures/attorneys/" + attorney.Avatar).Texture);
                             }
-                            handle.DrawTextureRect(_attorneyTextures[attorney.Avatar], new UIBox2(new Vector2(0, 0), new Vector2(150, 150)));
+                            //handle.DrawTextureRect(_attorneyTextures[attorney.Avatar], new UIBox2(new Vector2(0, 0), new Vector2(150, 150)));
+                            handle.DrawRect(new UIBox2(0, 0, 150, 150), attorney.Color);
                             break;
                         case true:
                             if (!_attorneyTextures.ContainsKey(attorney.Avatar))
                             {
                                 _attorneyTextures.Add(attorney.Avatar, _resCache.GetResource<TextureResource>("/Textures/attorneys/" + attorney.Avatar).Texture);
                             }
-                            handle.DrawTextureRect(_attorneyTextures[attorney.Avatar], new UIBox2(new Vector2(300, 0), new Vector2(300+150, 150)));
+                            //handle.DrawTextureRect(_attorneyTextures[attorney.Avatar], new UIBox2(new Vector2(300, 0), new Vector2(300+150, 150)));
+                            handle.DrawRect(new UIBox2(300, 0, 300 + 150, 150), attorney.Color);
                             break;
                     }
                 }

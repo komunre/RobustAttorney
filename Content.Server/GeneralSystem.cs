@@ -52,6 +52,7 @@ namespace Content.Server
                 var comp = attorney.AddComponent<AttorneyComponent>();
                 comp.NetSyncEnabled = true;
                 comp.AttorneyName = _names[_random.Next(_names.Length - 1)];
+                comp.Color = new Color(_random.NextFloat(1), _random.NextFloat(1), _random.NextFloat(1));
                 e.Session.AttachToEntity(attorney);
                 _playersJoined++;
                 if (_playersJoined % 2 == 0)
