@@ -63,7 +63,7 @@ jobs:
 
     steps:
     - name: Update submodules
-      run: git submodule --init --recursive
+      run: git submodule update --init --recursive
     
     - name: Checkout
       uses: actions/checkout@v2
