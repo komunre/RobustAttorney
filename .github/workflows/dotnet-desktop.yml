@@ -85,7 +85,7 @@ jobs:
       run: mkdir -p build/Game
       
     - name: Copy into build
-      run: cp -r bin/Content.Clinet build/Game && cp -r bin/Content.Cluent build/Game && cp -r Resources build/Game && cp -r -p RobustToolbox/Resources build/
+      run: cp -r bin/Content.Client build/Game && cp -r bin/Content.Client build/Game && cp -r Resources build/Game && cp -r -p RobustToolbox/Resources build/
 
     - name: Pack into zip
       run: zip -r build/ -o Client_build.zip
