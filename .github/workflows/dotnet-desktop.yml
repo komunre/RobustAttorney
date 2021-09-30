@@ -62,13 +62,14 @@ jobs:
     #  Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
-    - name: Update submodules
-      run: git submodule update --init --recursive
+    #- name: Update submodules
+    #  run: git submodule update --init --recursive
     
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        fetch-depth: 0
+        fetch-depth: 1
+        submodules: 'recursive'
 
     # Install the .NET Core workload
     - name: Install .NET Core
